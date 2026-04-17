@@ -19,9 +19,9 @@ updates:
     # Group dependency updates
     groups:
       development:
-        dependency-type: "dev"
+        dependency-types: ["dev"]
       production:
-        dependency-type: "production"
+        dependency-types: ["production"]
     # Allow automatic merge for patch and minor updates
     auto-merge: true
     allow-update-types:
