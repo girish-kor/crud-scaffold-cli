@@ -1,0 +1,74 @@
+name: Auto Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'package.json'
+      - 'src/**'
+      - '.github/workflows/auto-release.yml'
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      should-release: ${{ steps.check.outputs.should_release }}
+      version: ${{ steps.check.outputs.version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check version change
+        id: check
+        run: |
+          CURRENT_VERSION=$(jq -r '.version' package.json)
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          
+          if [ -z "$LATEST_TAG" ]; then
+            echo "should_release=true" >> $GITHUB_OUTPUT
+          else
+            LATEST_VERSION=${LATEST_TAG#v}
+            if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
+              echo "should_release=true" >> $GITHUB_OUTPUT
+            else
+              echo "should_release=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+          echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+
+  create-release:
+    needs: check-version
+    runs-on: ubuntu-latest
+    if: needs.check-version.outputs.should-release == 'true'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ needs.check-version.outputs.version }}
+          release_name: Release v${{ needs.check-version.outputs.version }}
+          body: |
+            ## Changes in this Release
+            
+            See [CHANGELOG.md](CHANGELOG.md) for detailed changes.
+            
+            ### Installation
+            ```bash
+            npm install -g crud-scaffold-cli@${{ needs.check-version.outputs.version }}
+            ```
+            
+            ### Verify Installation
+            ```bash
+            crud-scaffold --help
+            ```
+          draft: false
+          prerelease: false

@@ -1,0 +1,22 @@
+# Files to exclude from npm package
+node_modules/
+.git/
+.github/
+.editorconfig
+.eslintrc.json
+eslint.config.js
+.npmrc
+.prettierrc.json
+test-*/
+.gitignore
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+CHANGELOG.md
+SECURITY.md
+*.md
+*.log
+coverage/
+.DS_Store
+.env
+.env.local
+Makefile

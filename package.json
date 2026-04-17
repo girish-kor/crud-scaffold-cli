@@ -1,0 +1,79 @@
+{
+  "name": "crud-scaffold-cli",
+  "version": "1.0.0",
+  "description": "Modular, pluggable CRUD scaffolding CLI for production-grade applications",
+  "keywords": [
+    "crud",
+    "scaffold",
+    "cli",
+    "generator",
+    "nodejs",
+    "python",
+    "go",
+    "express",
+    "fastapi",
+    "gin",
+    "postgresql",
+    "mongodb",
+    "docker"
+  ],
+  "homepage": "https://github.com/girish-kor/crud-scaffold-cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/girish-kor/crud-scaffold-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/girish-kor/crud-scaffold-cli/issues",
+    "email": "support@example.com"
+  },
+  "license": "MIT",
+  "author": "Girish Kor <girishkor05@gmail.com>",
+  "main": "src/cli.js",
+  "type": "module",
+  "bin": {
+    "crud-scaffold": "./src/cli.js"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "files": [
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node src/cli.js",
+    "dev": "node src/cli.js --no-install",
+    "lint": "eslint src --ext .js",
+    "lint:fix": "eslint src --ext .js --fix",
+    "format": "prettier --write \"src/**/*.js\"",
+    "format:check": "prettier --check \"src/**/*.js\"",
+    "build": "npm run lint && npm run format:check",
+    "test": "echo \"No tests configured yet\" && exit 0",
+    "validate": "npm run lint:fix && npm run format"
+  },
+  "dependencies": {
+    "commander": "^14.0.3",
+    "inquirer": "^13.4.1",
+    "chalk": "^5.6.2",
+    "ora": "^9.3.0",
+    "fs-extra": "^11.3.4",
+    "ejs": "^5.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^10.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "prettier": "^3.8.3"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/girish-kor"
+  },
+  "preferGlobal": true,
+  "publishConfig": {
+    "access": "public"
+  }
+}

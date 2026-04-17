@@ -1,0 +1,38 @@
+# Configuration for GitHub Releases
+
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+    authors:
+      - dependabot
+  categories:
+    - title: Breaking Changes 🚨
+      labels:
+        - breaking
+    - title: Features ✨
+      labels:
+        - feature
+        - enhancement
+    - title: Fixes 🐛
+      labels:
+        - bug
+        - fix
+    - title: Documentation 📚
+      labels:
+        - documentation
+        - docs
+    - title: Performance 🚀
+      labels:
+        - performance
+    - title: Security 🔒
+      labels:
+        - security
+    - title: Maintenance 🔧
+      labels:
+        - maintenance
+        - chore
+    - title: Testing ✅
+      labels:
+        - test
+        - tests
